@@ -1,0 +1,58 @@
+let nomes = ['Ana', 'Carlos', 'Dionatan', 'João', 'Mathues', 'Lucas', 'Mariana', 'Pedro'];
+
+function renderizar(arr) {
+  const ul = document.getElementById('lista');
+  ul.innerHTML = '';
+  arr.forEach(function(nome) {
+    const li = document.createElement('li');
+    li.textContent = nome;
+    ul.appendChild(li);
+  });
+}
+
+function adicionarFinal() {
+  const input = document.getElementById('input-nome');
+  if (input.value.trim() === '') return;
+  nomes.push(input.value.trim());
+  input.value = '';
+  renderizar(nomes);
+}
+
+function adicionarInicio() {
+  const input = document.getElementById('input-nome');
+  if (input.value.trim() === '') return;
+  nomes.unshift(input.value.trim());
+  input.value = '';
+  renderizar(nomes);
+}
+
+function removerUltimo() {
+  nomes.pop();
+  renderizar(nomes);
+}
+
+function removerPrimeiro() {
+  nomes.shift();
+  renderizar(nomes);
+}
+
+function contarMaisDe5() {
+  let contador = 0;
+  for (let i = 0; i < nomes.length; i++) {
+    if (nomes[i].length > 5) contador++;
+  }
+  document.getElementById('resultado').textContent = 'Nomes com mais de 5 letras: ' + contador;
+  renderizar(nomes);
+}
+
+function exibirMaiusculo() {
+  document.getElementById('resultado').textContent = '';
+  renderizar(nomes.map(function(nome) { return nome.toUpperCase(); }));
+}
+
+function filtrarMaisDe5() {
+  document.getElementById('resultado').textContent = '';
+  renderizar(nomes.filter(function(nome) { return nome.length > 5; }));
+}
+
+renderizar(nomes);
